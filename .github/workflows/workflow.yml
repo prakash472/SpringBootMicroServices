@@ -29,9 +29,6 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        server-id: docker.io
-        server-username: DOCKER_USERNAME
-        server-password: DOCKER_PASSWORD
     - name : Check the Secrets
       run: |
           echo ${{ secrets.DOCKER_USERNAME }}
@@ -40,68 +37,53 @@ jobs:
           echo ${{ secrets.DOCKER_PASSWORD }}
           echo "PASSWORD=${{ secrets.DOCKER_PASSWORD }}">>$GITHUB_ENV
           echo "Pasword secret value: $PASSWORD"
-          
-
     - name: Building and Pushing User-service
       run: |
           cd user-service && 
           mvn clean install &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/user-service:0.0.2 . &&
           docker push prakash472/user-service:0.0.2
-
-      env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Building and Pushing Order-service
       run: |
           cd order-service && 
           mvn clean install &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/{{ env.ORDER_SERVICE }}:${{ env.VERSION_NUMBER }} . &&
           docker push prakash472/${{ env.ORDER_SERVICE }}:${{ env.VERSION_NUMBER }}
-      env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-    
+
     - name: Building and Pushing Product-service
       run: |
           cd product-service &&
           mvn clean install &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/{{ env.PRODUCT_SERVICE }}:${{ env.VERSION_NUMBER }} . &&
           docker push prakash472/${{ env.PRODUCT_SERVICE }}:${{ env.VERSION_NUMBER }}
-      env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Building and Pushing Cloud Config Service
       run: |
           cd cloud-config-server &&
           mvn clean install &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/{{ env.CLOUD_CONFIG_SERVER }}:${{ env.VERSION_NUMBER }} . &&
           docker push prakash472/${{ env.CLOUD_CONFIG_SERVER }}:${{ env.VERSION_NUMBER }}
-      env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and Pushing Service Registry
       run: |
           cd service-registry &&
           mvn clean install &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/${{ env.SERVICE_REGISTRY }}:${{ env.VERSION_NUMBER }} . &&
           docker push prakash472/${{ env.SERVICE_REGISTRY }}:${{ env.VERSION_NUMBER }}
-      env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-    
+      
     - name: Build and Pushing API Gateway
       run: |
           cd api-gateway &&
           mvn clean install &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/${{ env.API_GATEWAY }}:${{ env.VERSION_NUMBER }} . &&
           docker push prakash472/${{ env.API_GATEWAY }}:${{ env.VERSION_NUMBER }}
-      env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
   # Deploy:
   #   needs: build
