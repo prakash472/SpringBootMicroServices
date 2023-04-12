@@ -46,8 +46,8 @@ jobs:
       run: |
           cd user-service && 
           mvn clean install &&
-          docker build -t prakash472/${{ env.USER_SERVICE }}:${{ env.VERSION_NUMBER }} . &&
-          docker push prakash472/${{ env.USER_SERVICE }}:${{ env.VERSION_NUMBER }}
+          docker build -t prakash472/user-service:0.0.2 . &&
+          docker push prakash472/user-service:0.0.2
 
       env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
