@@ -35,10 +35,10 @@ jobs:
     - name : Check the Secrets
       run: |
           echo ${{ secrets.MY_SECRET }}
-          echo "::set-env name=USER_NAME::${{ secrets.DOCKER_USERNAME }}"
+          echo "USER_NAME=${{ secrets.DOCKER_USERNAME }}">>$GITHUB_ENV
           echo "Username secret value: $USER_NAME"  &&
           echo ${{ secrets.DOCKER_PASSWORD }}
-          echo "::set-env name=PASSWORD::${{ secrets.DOCKER_PASSWORD }}"
+          echo "PASSWORD=${{ secrets.DOCKER_PASSWORD }}">>$GITHUB_ENV
           echo "Pasword secret value: $PASSWORD"
           
 
