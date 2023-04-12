@@ -31,7 +31,11 @@ jobs:
         distribution: 'temurin'
         server-id: docker.io
         server-username: DOCKER_USERNAME
-        server-password: DOCKER_PASSWORD        
+        server-password: DOCKER_PASSWORD
+    - name : Check the Secrets
+      run: |
+          echo "DOCKER USERNAME=${{ secrets.DOCKER_USERNAME }}" && 
+          echo "DOCKER PASSWORD"=${{ secrets.DOCKER_PASSWORD }}  
 
     - name: Building and Pushing User-service
       run: |
