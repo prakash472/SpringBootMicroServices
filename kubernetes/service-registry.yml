@@ -1,0 +1,75 @@
+# https://kubernetes.io/docs/concepts/configuration/configmap/
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: eureka-cm
+  namespace: default
+data:
+  eureka_service_address: http://eureka-0.eureka:8761/eureka
+
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka
+  labels:
+    app: eureka
+spec:
+  clusterIP: None
+  ports:
+    - port: 8761
+      name: eureka
+  selector:
+    app: eureka
+---
+
+# https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: eureka
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: eureka # has to match .spec.template.metadata.labels
+  serviceName: "eureka"
+  replicas: 1 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: eureka # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: eureka
+        image: prakash472/service-registry:0.0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8761
+          name: eureka
+        env:
+          - name: EUREKA_SERVER_ADDRESS
+            valueFrom:
+              configMapKeyRef:
+                name: eureka-cm
+                key: eureka_service_address
+---   
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka-lb
+  labels:
+    app: eureka
+spec:
+  selector:
+    app: eureka
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 8761
+
+
+
