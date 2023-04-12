@@ -38,7 +38,8 @@ jobs:
           cd user-service && 
           mvn clean install &&
           docker build -t prakash472/${{ env.USER_SERVICE }}:${{ env.VERSION_NUMBER }} . &&
-          docker push prakash472/{{ env.USER_SERVICE }}:${{ env.VERSION_NUMBER }}
+          docker push prakash472/${{ env.USER_SERVICE }}:${{ env.VERSION_NUMBER }}
+
       env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -48,7 +49,7 @@ jobs:
           cd order-service && 
           mvn clean install &&
           docker build -t prakash472/{{ env.ORDER_SERVICE }}:${{ env.VERSION_NUMBER }} . &&
-          docker push prakash472/{{ env.ORDER_SERVICE }}:${{ env.VERSION_NUMBER }}
+          docker push prakash472/${{ env.ORDER_SERVICE }}:${{ env.VERSION_NUMBER }}
       env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -58,7 +59,7 @@ jobs:
           cd product-service &&
           mvn clean install &&
           docker build -t prakash472/{{ env.PRODUCT_SERVICE }}:${{ env.VERSION_NUMBER }} . &&
-          docker push prakash472/{{ env.PRODUCT_SERVICE }}:${{ env.VERSION_NUMBER }}
+          docker push prakash472/${{ env.PRODUCT_SERVICE }}:${{ env.VERSION_NUMBER }}
       env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -68,7 +69,7 @@ jobs:
           cd cloud-config-server &&
           mvn clean install &&
           docker build -t prakash472/{{ env.CLOUD_CONFIG_SERVER }}:${{ env.VERSION_NUMBER }} . &&
-          docker push prakash472/{{ env.CLOUD_CONFIG_SERVER }}:${{ env.VERSION_NUMBER }}
+          docker push prakash472/${{ env.CLOUD_CONFIG_SERVER }}:${{ env.VERSION_NUMBER }}
       env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -78,7 +79,7 @@ jobs:
           cd service-registry &&
           mvn clean install &&
           docker build -t prakash472/${{ env.SERVICE_REGISTRY }}:${{ env.VERSION_NUMBER }} . &&
-          docker push prakash472/{{ env.SERVICE_REGISTRY }}:${{ env.VERSION_NUMBER }}
+          docker push prakash472/${{ env.SERVICE_REGISTRY }}:${{ env.VERSION_NUMBER }}
       env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
