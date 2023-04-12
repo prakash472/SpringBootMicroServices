@@ -41,7 +41,7 @@ jobs:
       run: |
           cd user-service && 
           mvn clean install &&
-          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/user-service:0.0.2 . &&
           docker push prakash472/user-service:0.0.2
 
@@ -49,7 +49,7 @@ jobs:
       run: |
           cd order-service && 
           mvn clean install &&
-          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/{{ env.ORDER_SERVICE }}:${{ env.VERSION_NUMBER }} . &&
           docker push prakash472/${{ env.ORDER_SERVICE }}:${{ env.VERSION_NUMBER }}
 
@@ -57,7 +57,7 @@ jobs:
       run: |
           cd product-service &&
           mvn clean install &&
-          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/{{ env.PRODUCT_SERVICE }}:${{ env.VERSION_NUMBER }} . &&
           docker push prakash472/${{ env.PRODUCT_SERVICE }}:${{ env.VERSION_NUMBER }}
 
@@ -65,7 +65,7 @@ jobs:
       run: |
           cd cloud-config-server &&
           mvn clean install &&
-          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/{{ env.CLOUD_CONFIG_SERVER }}:${{ env.VERSION_NUMBER }} . &&
           docker push prakash472/${{ env.CLOUD_CONFIG_SERVER }}:${{ env.VERSION_NUMBER }}
 
@@ -73,7 +73,7 @@ jobs:
       run: |
           cd service-registry &&
           mvn clean install &&
-          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/${{ env.SERVICE_REGISTRY }}:${{ env.VERSION_NUMBER }} . &&
           docker push prakash472/${{ env.SERVICE_REGISTRY }}:${{ env.VERSION_NUMBER }}
       
@@ -81,7 +81,7 @@ jobs:
       run: |
           cd api-gateway &&
           mvn clean install &&
-          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{DOCKER_PASSWORD}} docker.io &&
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}} docker.io &&
           docker build -t prakash472/${{ env.API_GATEWAY }}:${{ env.VERSION_NUMBER }} . &&
           docker push prakash472/${{ env.API_GATEWAY }}:${{ env.VERSION_NUMBER }}
 
