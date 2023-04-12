@@ -34,8 +34,13 @@ jobs:
         server-password: DOCKER_PASSWORD
     - name : Check the Secrets
       run: |
-          echo "DOCKER USERNAME=${{ secrets.DOCKER_USERNAME }}" && 
-          echo "DOCKER PASSWORD"=${{ secrets.DOCKER_PASSWORD }}  
+          echo ${{ secrets.MY_SECRET }}
+          echo "::set-env name=USER_NAME::${{ secrets.DOCKER_USERNAME }}"
+          echo "Username secret value: $USER_NAME"  &&
+          echo ${{ secrets.DOCKER_PASSWORD }}
+          echo "::set-env name=PASSWORD::${{ secrets.DOCKER_PASSWORD }}"
+          echo "Pasword secret value: $PASSWORD"
+          
 
     - name: Building and Pushing User-service
       run: |
