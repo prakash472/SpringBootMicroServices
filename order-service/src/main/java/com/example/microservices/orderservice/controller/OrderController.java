@@ -8,7 +8,6 @@ import com.example.microservices.orderservice.services.OrderService;
 import io.opentracing.Span;
 import io.opentracing.Tracer;
 
-import lombok.extern.slf4j.Slf4j;
 
 
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
-@Slf4j
 public class OrderController {
     private final RestTemplate restTemplate;
     private final OrderService orderService;
@@ -38,22 +36,6 @@ public class OrderController {
     public OrderEntity createOrder(@RequestBody OrderEntity order){
         return orderService.createOrder(order);
     }
-//    @GetMapping("/{id}")
-//    public OrderDetailsVO getOrderDetailsById(@PathVariable Long id) {
-//        Span span = tracer.buildSpan("Order Service").start();
-//        span.setTag("orderDetails", "orderDetails");
-//        log.info("Getting the Order Details by Id");
-//        OrderEntity orderEntity = orderService.getOrdersById(id);
-//        Product product=restTemplate.getForObject("http://PRODUCT-SERVICE/products/"+orderEntity.getProductId(),Product.class);
-//        Customer customer = restTemplate.getForObject("http://CUSTOMER-SERVICE/users/"+orderEntity.getCustomerId(),Customer.class);
-//        OrderDetailsVO orderDetailsVO = new OrderDetailsVO();
-//        orderDetailsVO.setOrderId(id);
-//        orderDetailsVO.setProductName(product.getName());
-//        orderDetailsVO.setCustomerName(customer.getName());
-//        orderDetailsVO.setPurchaseDate(orderEntity.getPurchaseDate());
-//        span.finish();
-//        return orderDetailsVO;
-//    }
     @GetMapping("/{id}")
     public OrderDetailsVO getOrderDetailsById(@PathVariable Long id) {
         Span oderSpan = tracer.buildSpan("Order Service").start();

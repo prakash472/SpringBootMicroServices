@@ -2,7 +2,6 @@ package com.example.microservices.orderservice.services;
 
 import com.example.microservices.orderservice.entity.OrderEntity;
 import com.example.microservices.orderservice.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

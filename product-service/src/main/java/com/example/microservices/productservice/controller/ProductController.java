@@ -4,7 +4,6 @@ import com.example.microservices.productservice.entity.Product;
 import com.example.microservices.productservice.services.ProductService;
 import io.opentracing.Span;
 import io.opentracing.Tracer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/products")

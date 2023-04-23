@@ -37,12 +37,11 @@ kubectl port-forward service/api-gateway-svc 8084:80
 After clicking http://localhost:8761 in the link, we will see all the services of our microservices. This is the eureka server registry.
 Some screenshots to verify them are:
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/prakash472/SpringBootMicroServices/blob/main/Screenshots/ServiceRegitry.png)
 
+![App Screenshot](https://github.com/prakash472/SpringBootMicroServices/blob/main/Screenshots/kubernetes.png)
 # Monitoring
 The microservices are monitored using Jaeger and Micrometer for real-time API call tracing. The Actuator endpoints are configured to Prometheus for comprehensive monitoring of microservices performance.
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./Screenshots/Monitoring-1.png)
+![App Screenshot](https://github.com/prakash472/SpringBootMicroServices/blob/main/Screenshots/Monitoring-2.png)

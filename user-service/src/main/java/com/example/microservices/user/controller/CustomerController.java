@@ -4,7 +4,6 @@ import com.example.microservices.user.entity.Customer;
 import com.example.microservices.user.services.CustomerService;
 import io.opentracing.Span;
 import io.opentracing.Tracer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController()
